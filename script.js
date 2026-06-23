@@ -204,8 +204,21 @@ project.dataset.software;
 modalFeatures.textContent =
 project.dataset.features;
 
-pdfLink.href =
-project.dataset.pdf;
+// PDF BUTTON CONTROL
+
+const pdfFile = project.dataset.pdf;
+
+if(pdfFile && pdfFile.trim() !== ""){
+
+    pdfLink.href = pdfFile;
+
+    pdfLink.style.display = "inline-flex";
+
+}else{
+
+    pdfLink.style.display = "none";
+
+}
 
 const imageData = project.dataset.images;
 
