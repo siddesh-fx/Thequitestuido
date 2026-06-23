@@ -207,13 +207,25 @@ project.dataset.features;
 pdfLink.href =
 project.dataset.pdf;
 
-galleryImages =
-project.dataset.images.split(",");
+const imageData = project.dataset.images;
 
-currentImage = 0;
+if(imageData && imageData.trim() !== ""){
 
-sliderImage.src =
-galleryImages[currentImage];
+    galleryImages = imageData.split(",");
+
+    currentImage = 0;
+
+    sliderImage.src = galleryImages[currentImage];
+
+    document.querySelector(".slider-wrapper").style.display = "flex";
+
+}else{
+
+    galleryImages = [];
+
+    document.querySelector(".slider-wrapper").style.display = "none";
+
+}
 
 modal.classList.add("active");
 
@@ -329,3 +341,36 @@ closeProjectModal();
 window.dispatchEvent(
 new Event("scroll")
 );
+// ====================================
+// CONTACT FORM MAILTO
+// ====================================
+
+const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const project = document.getElementById("project").value;
+
+    const subject =
+        encodeURIComponent(`New Project Inquiry from ${name}`);
+
+    const body =
+        encodeURIComponent(
+`Name: ${name}
+
+Email: ${email}
+
+Project Details:
+${project}`
+        );
+
+    const gmailUrl =
+        `https://mail.google.com/mail/?view=cm&fs=1&to=sid.fx.3d@gmail.com&su=${subject}&body=${body}`;
+
+    window.open(gmailUrl, "_blank");
+
+});
